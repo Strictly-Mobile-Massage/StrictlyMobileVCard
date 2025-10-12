@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Strictly Mobile Massage - Ryan Ross</title>
+    <!-- Security: Prevent search engines from caching payment info -->
+    <meta name="robots" content="noarchive">
+    <!-- Security: Referrer policy to limit data shared -->
+    <meta name="referrer" content="no-referrer-when-downgrade">
     <style>
         * {
             margin: 0;
@@ -550,15 +554,15 @@
             <div id="paymentMenu" class="payment-menu" style="display: none;" onclick="closePaymentMenu(event)">
                 <div class="payment-menu-content">
                     <h3 style="margin: 0 0 20px 0; color: #333; text-align: center;">Select Payment Method</h3>
-                    <a href="https://venmo.com/code?user_id=2511176730673152508&created=1760305118" class="payment-option" target="_blank">
+                    <a href="https://venmo.com/code?user_id=2511176730673152508&created=1760305118" class="payment-option" target="_blank" onclick="return checkRateLimit('venmo')">
                         <span class="payment-name">Venmo</span>
                         <span class="payment-handle">@StrictlyMobile</span>
                     </a>
-                    <a href="https://enroll.zellepay.com/qr-codes?data=eyJuYW1lIjoiUllBTiIsInRva2VuIjoiNDc5MjY0MTQyOCIsImFjdGlvbiI6InBheW1lbnQifQ==" class="payment-option" target="_blank">
+                    <a href="https://enroll.zellepay.com/qr-codes?data=eyJuYW1lIjoiUllBTiIsInRva2VuIjoiNDc5MjY0MTQyOCIsImFjdGlvbiI6InBheW1lbnQifQ==" class="payment-option" target="_blank" onclick="return checkRateLimit('zelle')">
                         <span class="payment-name">Zelle</span>
                         <span class="payment-handle">479-264-1428</span>
                     </a>
-                    <a href="https://cash.app/$Ryan5129" class="payment-option" target="_blank">
+                    <a href="https://cash.app/$Ryan5129" class="payment-option" target="_blank" onclick="return checkRateLimit('cashapp')">
                         <span class="payment-name">Cash App</span>
                         <span class="payment-handle">$Ryan5129</span>
                     </a>
@@ -771,6 +775,20 @@ END:VCARD`;
             window.URL.revokeObjectURL(url);
         }
 
+        // Security: Rate limiting for payment clicks
+        let lastPaymentClick = {};
+        const RATE_LIMIT_MS = 3000; // 3 seconds between clicks
+
+        function checkRateLimit(paymentType) {
+            const now = Date.now();
+            if (lastPaymentClick[paymentType] && (now - lastPaymentClick[paymentType] < RATE_LIMIT_MS)) {
+                alert('Please wait a moment before trying again.');
+                return false;
+            }
+            lastPaymentClick[paymentType] = now;
+            return true;
+        }
+
         // Payment menu functions
         function togglePaymentMenu() {
             const menu = document.getElementById('paymentMenu');
@@ -783,6 +801,14 @@ END:VCARD`;
                 document.getElementById('paymentMenu').style.display = 'none';
             }
         }
+
+        // Security: Disable right-click on payment info
+        document.addEventListener('contextmenu', function(e) {
+            if (e.target.closest('.payment-menu') || e.target.closest('.contact-item')) {
+                e.preventDefault();
+                return false;
+            }
+        });
     </script>
 </body>
 </html>

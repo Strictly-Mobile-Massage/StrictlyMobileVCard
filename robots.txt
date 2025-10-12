@@ -1,0 +1,27 @@
+# Robots.txt for Strictly Mobile Massage
+# Prevent aggressive crawling
+
+User-agent: *
+Crawl-delay: 5
+Disallow: /api/
+Disallow: /*.json$
+
+# Block known bad bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# Allow legitimate search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /

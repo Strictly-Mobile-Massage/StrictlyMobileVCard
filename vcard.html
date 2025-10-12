@@ -158,6 +158,70 @@
             box-shadow: 0 6px 20px rgba(124, 132, 113, 0.4);
         }
 
+        /* Payment Menu Styles */
+        .payment-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            animation: fadeIn 0.2s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .payment-menu-content {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 350px;
+            width: 90%;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            animation: slideUp 0.3s;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .payment-option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            margin: 8px 0;
+            background: #f8f8fa;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.2s;
+        }
+
+        .payment-option:hover {
+            background: linear-gradient(135deg, #7c8471 0%, #8a9178 100%);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .payment-name {
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .payment-handle {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
         .contact-info {
             margin-bottom: 40px;
         }
@@ -477,9 +541,28 @@
                 <a href="https://www.strictlymobilemassage.com/book" class="book-now-button" target="_blank" style="min-width: 120px;">
                     Book
                 </a>
-                <a href="https://venmo.com/code?user_id=2511176730673152508&created=1760305118" class="book-now-button" target="_blank" style="margin-left: 15px; min-width: 120px;">
+                <button onclick="togglePaymentMenu()" class="book-now-button" style="margin-left: 15px; min-width: 120px; border: none; font-family: inherit; font-size: inherit; cursor: pointer;">
                     Pay
-                </a>
+                </button>
+            </div>
+
+            <!-- Payment Menu -->
+            <div id="paymentMenu" class="payment-menu" style="display: none;" onclick="closePaymentMenu(event)">
+                <div class="payment-menu-content">
+                    <h3 style="margin: 0 0 20px 0; color: #333; text-align: center;">Select Payment Method</h3>
+                    <a href="https://venmo.com/code?user_id=2511176730673152508&created=1760305118" class="payment-option" target="_blank">
+                        <span class="payment-name">Venmo</span>
+                        <span class="payment-handle">@StrictlyMobile</span>
+                    </a>
+                    <a href="sms:479-264-1428?body=Hi%20Ryan,%20I'd%20like%20to%20pay%20via%20Zelle" class="payment-option">
+                        <span class="payment-name">Zelle</span>
+                        <span class="payment-handle">479-264-1428</span>
+                    </a>
+                    <a href="https://cash.app/$StrictlyMobile" class="payment-option" target="_blank">
+                        <span class="payment-name">Cash App</span>
+                        <span class="payment-handle">$StrictlyMobile</span>
+                    </a>
+                </div>
             </div>
 
             <div class="contact-info">
@@ -683,6 +766,19 @@ END:VCARD`;
             a.click();
             document.body.removeChild(a);
             window.URL.revokeObjectURL(url);
+        }
+
+        // Payment menu functions
+        function togglePaymentMenu() {
+            const menu = document.getElementById('paymentMenu');
+            menu.style.display = menu.style.display === 'none' ? 'flex' : 'none';
+        }
+
+        function closePaymentMenu(event) {
+            // Close menu if clicking on background
+            if (event.target.id === 'paymentMenu') {
+                document.getElementById('paymentMenu').style.display = 'none';
+            }
         }
     </script>
 </body>

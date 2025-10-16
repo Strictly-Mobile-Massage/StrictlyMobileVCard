@@ -44,24 +44,32 @@
                 border-radius: 20px;
                 overflow: hidden;
                 margin: 20px auto;
+                width: 85%;
+                max-width: 85%;
             }
         }
 
         @media (min-width: 1024px) {
             .container {
-                max-width: 60vw;  /* 60% of viewport width */
-                min-width: 700px;
+                width: 75%;
+                max-width: 75%;
             }
-        }
         }
 
         @media (min-width: 1440px) {
             .container {
-                max-width: 55vw;  /* 55% of viewport width */
-                min-width: 800px;
-                max-width: 900px; /* Cap at 900px for ultra-wide screens */
+                width: 65%;
+                max-width: 65%;
+                max-width: 1100px; /* Cap for ultra-wide */
             }
         }
+
+        @media (min-width: 1920px) {
+            .container {
+                width: 55%;
+                max-width: 55%;
+                max-width: 1200px; /* Cap for readability */
+            }
         }
 
         .header {
@@ -590,20 +598,7 @@
             }
         }
 
-        /* Ultra-wide screens */
-        @media (min-width: 1920px) {
-            .container {
-                max-width: 50vw;  /* 50% of viewport width */
-                min-width: 900px;
-                max-width: 1000px; /* Cap at 1000px for readability */
-            }
-
-            .profile-image {
-                width: 280px;
-                height: 280px;
-            }
-        }
-        }
+        /* Ultra-wide screens - removed duplicate, defined above */
 
         /* Print styles */
         @media print {

@@ -49,14 +49,19 @@
 
         @media (min-width: 1024px) {
             .container {
-                max-width: 520px;
+                max-width: 60vw;  /* 60% of viewport width */
+                min-width: 700px;
             }
+        }
         }
 
         @media (min-width: 1440px) {
             .container {
-                max-width: 560px;
+                max-width: 55vw;  /* 55% of viewport width */
+                min-width: 800px;
+                max-width: 900px; /* Cap at 900px for ultra-wide screens */
             }
+        }
         }
 
         .header {
@@ -225,14 +230,16 @@
 
         @media (min-width: 768px) {
             .content {
-                padding: 70px 40px 40px;
+                padding: 70px 60px 40px;
             }
+        }
         }
 
         @media (min-width: 1024px) {
             .content {
-                padding: 80px 50px 50px;
+                padding: 80px 80px 50px;
             }
+        }
         }
 
         .bio {
@@ -246,17 +253,20 @@
 
         @media (min-width: 768px) {
             .bio {
-                font-size: 17px;
+                font-size: 18px;
                 line-height: 1.7;
-                padding: 0 20px;
+                padding: 0 30px;
             }
+        }
         }
 
         @media (min-width: 1440px) {
             .bio {
-                font-size: 18px;
+                font-size: 20px;
                 line-height: 1.8;
+                padding: 0 40px;
             }
+        }
         }
 
         .book-now-section {
@@ -411,8 +421,10 @@
 
         @media (min-width: 768px) {
             .contact-item {
-                padding: 18px 20px;
+                padding: 20px 30px;
+                margin-bottom: 16px;
             }
+        }
         }
 
         .contact-item:hover {
@@ -581,13 +593,16 @@
         /* Ultra-wide screens */
         @media (min-width: 1920px) {
             .container {
-                max-width: 600px;
+                max-width: 50vw;  /* 50% of viewport width */
+                min-width: 900px;
+                max-width: 1000px; /* Cap at 1000px for readability */
             }
 
             .profile-image {
                 width: 280px;
                 height: 280px;
             }
+        }
         }
 
         /* Print styles */
